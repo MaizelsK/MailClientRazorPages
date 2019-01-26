@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Services;
+using Services.Abstract;
 
 namespace MailClientRazorPages
 {
@@ -31,6 +33,9 @@ namespace MailClientRazorPages
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            var mailSection = Configuration.GetSection("MailSettings");
+
+            services.AddTransient<IEmailService>(service => new GmailService(mailSection));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

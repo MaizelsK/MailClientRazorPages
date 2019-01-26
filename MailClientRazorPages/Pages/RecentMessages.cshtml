@@ -1,0 +1,37 @@
+﻿@page
+@model MailClientRazorPages.Pages.RecentMessagesModel
+@{
+    ViewData["Title"] = "RecentMessages";
+}
+
+<h2>Recent Messages</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                From
+            </th>
+            <th>
+                Subject
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Messages)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.From)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Subject)
+                </td>
+                <td>
+                    <a asp-page="./MessageDetails" asp-route-index="@item.Index">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
